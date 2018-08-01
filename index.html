@@ -1,0 +1,124 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+<link rel="stylesheet" href="style.css"/>
+
+<div id="app" class="wrapper">
+  <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top border-bottom py-0 justify-content-start">
+    <a type="button" id="sidebarCollapse" @click="toggleMenu" class="btn"><i class="fa" :class="{ 'fa-bars': isActive, 'fa-window-close' : !isActive }"></i></a>
+    <a class="navbar-brand" href="#">
+
+      <span class="fa-2x pl-2">
+        <i class="fab fa-reddit reddit-orange"></i>
+      </span>
+      <span class="reddit-brand d-none d-sm-inline">reddit<span></a>
+      <ul class="navbar-nav mr-auto mt-lg-0 ml-3 d-none d-md-flex">
+        <li class="nav-item dropdown">
+          <select class="nav-link mr-3" v-model="filterCategory">
+          <option value=1>Filter by upvotes</option>
+          <option value=200>At least 200 upvotes</option>
+          <option value=500>At least 500 upvotes</option>
+          <option value=1000>At least 1k upvotes</option>
+          <option value=5000>At least 5k upvotes</option>
+          <option value=10000>At least 10k upvotes</option>
+          <option value=20000>At least 20k upvotes</option>
+          <option value=50000>At least 50k upvotes</option>
+         </select>
+        </li>
+        <li class="nav-item dropdown">
+          <select class="nav-link" v-on:change="getPosts" v-model="currentSub">
+          <option value="awww">r/awww</option>
+          <option value="oldschoolcool">r/OldSchoolCool</option>
+          <option value="funny">r/funny</option>
+          <option value="gifs">r/gifs</option>
+          <option value="todayilearned">r/todayilearned</option>
+          <option value="nevertellmetheodds">r/nevertellmetheodds</option>
+          <option value="cats">r/cats</option>
+         </select>
+        </li>
+      </ul>
+        <div class="row ml-sm-3">
+        <form class="form-inline" @submit.prevent="getPosts">
+          <div class="input-group mt-3">
+            <div class="input-group-prepend"><button class="btn btn-dark" type="submit"><i class="fas fa-search"></i></button>
+            </div>
+            <input class="form-control mr-sm-2 col-md-12" type="search" :placeholder="'Search ' + currentSub" v-model="searchText" @input="validateSampleText" aria-label="Search" size="15">
+          </div>
+        </form>
+        </div>
+  </nav>
+
+  <nav id="sidebar" class="below-nav" :class="{ active: isActive }">
+
+    <h6 class="sidebar-header">REDDIT FEEDS</h6>
+    <ul class="list-unstyled components pl-3">
+      <li><i class="fab fa-reddit-alien"></i> Home</li>
+      <li><i class="fas fa-chart-line"></i> Popular</li>
+      <li><i class="far fa-chart-bar"></i> All</li>
+      <li><i class="far fa-question-circle"></i> Original Content</li>
+
+      <li>
+        <a href="#subscriptions" data-toggle="collapse" aria-expanded="false" class="sidebar-dropdown dropdown-toggle">SUBSCRIPTIONS</a>
+        <ul class="collapse show list-unstyled" id="subscriptions">
+          <li id="subs" v-for="subs in subscribedSubs" :key="subs.id">
+            <a :title="subs.tagline" class="reddit-posted-by" :href="subs.url" target="_blank">{{ subs.name }}</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle sidebar-dropdown">PROFILES</a>
+        <ul class="collapse show list-unstyled" id="pageSubmenu">
+          <li>
+            <a href="#">u/MisterYouAreSoDumb</a>
+          </li>
+          <li>
+            <a href="#">u/trinnux</a>
+          </li>
+          <li>
+            <a href="#">u/ashtonmv</a>
+          </li>
+        </ul>
+      </li>
+      <hr>
+      <li>
+        <button class="btn btn-primary mt-3"><span class="sml-btn"><i class="fas fa-globe-americas"></i> CREATE A NEW COMMUNITY</span></button>
+      </li>
+    </ul>
+
+  </nav>
+
+  <div class="container-fluid bg-grey below-nav">
+    <div class="container-fluid bg-light px-0 mx-2">
+      <div id="post" class="border" v-for="post in filteredPosts" :key="post.id">
+        <div class="row flex-nowrap">
+          <div class="score">
+            <ul class="list-unstyled text-center">
+              <li><i class="fas fa-arrow-up"></i></li>
+              <li><span class="sml-spn">{{  kFormatter(post.data.score) }}</span></li>
+              <li><i class="fas fa-arrow-down"></i></li>
+            </ul>
+          </div>
+
+          <div class="reddit-style"><img v-bind:src="post.data.thumbnail" width="80px" height="60px" class="rounded cropped"></div>
+          <div class="reddit-style">
+            <span class="reddit-post-title"><a :href="permaLink + post.data.permalink" target="_blank">{{ post.data.title }}</a></span>
+<a :href="post.data.url" target="_blank" class="sml-a">
+      {{ truncate(post.data.url, 22).substr(8) }}
+            </a>
+            <div>
+              <span class="reddit-posted-by">Posted by <a href="">u/{{ post.data.author }}</a> </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center" v-show="postsLoading">
+      Loading...
+    </div>
+  </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="script.js"/></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>

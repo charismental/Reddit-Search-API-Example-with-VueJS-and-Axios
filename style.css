@@ -1,0 +1,139 @@
+#sidebar {
+    height:100vh;
+    left:0;
+    position:250px;
+    top:0;
+    transition:all .3s;
+    width:250px;
+    z-index:999;
+    }
+    
+    #sidebar .sidebar-dropdown {
+    color:#a0a0a0;
+    font-size:.75rem;
+    font-weight:700;
+    margin-bottom:-15px;
+    padding-left:0;
+    padding-top:15px;
+    }
+    
+    #sidebar .sidebar-header {
+    color:#a0a0a0;
+    font-size:.75rem;
+    font-weight:700;
+    margin-bottom:-15px;
+    padding-left:20px;
+    padding-top:15px;
+    }
+    
+    #sidebar ul li a {
+    display:block;
+    font-size:1.1em;
+    padding:10px;
+    }
+    
+    #sidebar ul p {
+    padding:10px;
+    }
+    
+    #sidebar ul.components {
+    padding:20px 0;
+    }
+    
+    #sidebar.active {
+    margin-left:-250px;
+    }
+    
+    .below-nav {
+    padding-top:75px;
+    }
+    
+    .bg-grey {
+    background-color:lightgray;
+    }
+    
+    .cropped {
+    object-fit:cover;
+    }
+    
+    .dropdown-toggle::after {
+    display:block;
+    position:absolute;
+    right:20px;
+    top:50%;
+    transform:translateY(-50%);
+    }
+    
+    .fa-1x {
+    font-size:1.5rem;
+    }
+    
+    .icon-background {
+    color:#ff4500;
+    }
+    
+    .navbar-toggle {
+    display:block;
+    }
+    
+    .reddit-brand {
+    font-size:2rem;
+    font-weight:600;
+    }
+    
+    .reddit-orange {
+    color:#ff5700;
+    }
+    
+    .reddit-post-title {
+    font-weight:500;
+    padding-right:5px;
+    padding-top:25px;
+    }
+    
+    .reddit-posted-by,.reddit-posted-by a,.reddit-posted-by a:hover {
+    color:#7c7c7c;
+    font-size:12px;
+    }
+    
+    .reddit-style {
+    padding:10px 0 5px 10px;
+    }
+    
+    .score {
+    background-color:#ededed;
+    color:#878a8c;
+    fill:#878a8c;
+    flex:none;
+    height:auto;
+    padding:8px 4px 8px 0;
+    width:40px;
+    }
+    
+    .sml-a {
+    font-size:12px;
+    }
+    
+    .sml-btn {
+    font-size:.75em;
+    }
+    
+    .sml-spn {
+    color:#000;
+    font-size:12px;
+    font-weight:700;
+    }
+    
+    .wrapper {
+    display:flex;
+    width:100%;
+    }
+    
+    a[data-toggle="collapse"] {
+    position:relative;
+    }
+    
+    ul ul a {
+    font-size:.9em!important;
+    padding-left:30px!important;
+    }
