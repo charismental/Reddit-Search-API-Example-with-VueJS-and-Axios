@@ -1,6 +1,15 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-<link rel="stylesheet" href="style.css"/>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Reddit API</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css"/> 
+</head>
+<body>
 
 <div id="app" class="wrapper">
   <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top border-bottom py-0 justify-content-start">
@@ -38,7 +47,7 @@
       </ul>
         <div class="row ml-sm-3">
         <form class="form-inline" @submit.prevent="getPosts">
-          <div class="input-group mt-3">
+          <div class="input-group">
             <div class="input-group-prepend"><button class="btn btn-dark" type="submit"><i class="fas fa-search"></i></button>
             </div>
             <input class="form-control mr-sm-2 col-md-12" type="search" :placeholder="'Search ' + currentSub" v-model="searchText" @input="validateSampleText" aria-label="Search" size="15">
@@ -119,6 +128,8 @@
 
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="script.js"/></script>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  <script src="script.js"/></script>
+</body>
+</html>
